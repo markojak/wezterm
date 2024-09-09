@@ -3,6 +3,7 @@ local platform = require('utils.platform')()
 local options = {
    default_prog = {},
    launch_menu = {},
+   default_cwd = '~/workspace',  -- Added this line
 }
 
 if platform.is_win then
@@ -14,17 +15,19 @@ if platform.is_win then
       { label = 'Nushell', args = { 'nu' } },
       {
          label = 'Git Bash',
-         args = { 'C:\\Users\\kevin\\scoop\\apps\\git\\current\\bin\\bash.exe' },
+         args = { 'C:\\Users\\markoj\\scoop\\apps\\git\\current\\bin\\bash.exe' },
       },
    }
 elseif platform.is_mac then
-   options.default_prog = { '/opt/homebrew/bin/fish', '-l' }
+   options.default_prog = { '/bin/zsh', '-l' }  -- Changed to zsh
+   options.default_cwd = '~/workspace'  -- macOS/Linux path
    options.launch_menu = {
+      { label = 'Zsh', args = { '/bin/zsh', '-l' } },  -- Moved Zsh to the top
       { label = 'Bash', args = { 'bash', '-l' } },
       { label = 'Fish', args = { '/opt/homebrew/bin/fish', '-l' } },
       { label = 'Nushell', args = { '/opt/homebrew/bin/nu', '-l' } },
-      { label = 'Zsh', args = { 'zsh', '-l' } },
    }
+   
 elseif platform.is_linux then
    options.default_prog = { 'fish', '-l' }
    options.launch_menu = {

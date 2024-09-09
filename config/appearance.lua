@@ -1,6 +1,6 @@
 local wezterm = require('wezterm')
 local gpu_adapters = require('utils.gpu_adapter')
-local colors = require('colors.custom')
+-- local colors = require('colors.custom')  -- Commented out this line
 
 return {
    animation_fps = 60,
@@ -10,19 +10,19 @@ return {
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
    -- color scheme
-   colors = colors,
+   color_scheme = 'nightfox',  -- Changed to lowercase 'nightfox'
 
    -- background
    background = {
       {
          source = { File = wezterm.GLOBAL.background },
-         horizontal_align = 'Center',
+         height = '100%',  -- Added height
+         opacity = 0.5,    -- Adjusted opacity
       },
       {
-         source = { Color = colors.background },
+         source = { Color = wezterm.color.parse('rgba(0, 0, 0, 0.85)') },  -- Changed to a semi-transparent black
          height = '100%',
          width = '100%',
-         opacity = 0.96,
       },
    },
 
@@ -32,7 +32,7 @@ return {
    -- tab bar
    enable_tab_bar = true,
    hide_tab_bar_if_only_one_tab = false,
-   use_fancy_tab_bar = false,
+   use_fancy_tab_bar = true,
    tab_max_width = 25,
    show_tab_index_in_tab_bar = false,
    switch_to_last_active_tab_when_closing_tab = true,

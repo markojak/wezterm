@@ -7,6 +7,8 @@ return {
 
    scrollback_lines = 5000,
 
+   default_cwd = '~/workspace',  -- Add this line for default working directory
+
    hyperlink_rules = {
       -- Matches: a URL in parens: (URL)
       {

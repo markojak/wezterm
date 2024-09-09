@@ -56,6 +56,9 @@ local keys = {
    -- copy/paste --
    { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') },
    { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') },
+   -- Alternative bindings
+   { key = 'C',          mods = 'CTRL',        action = act.CopyTo('Clipboard') },
+   { key = 'V',          mods = 'CTRL',        action = act.PasteFrom('Clipboard') },
 
    -- tabs --
    -- tabs: spawn+close
@@ -190,7 +193,7 @@ local mouse_bindings = {
 }
 
 return {
-   disable_default_key_bindings = true,
+   disable_default_key_bindings = false,
    leader = { key = 'Space', mods = mod.SUPER_REV },
    keys = keys,
    key_tables = key_tables,
