@@ -15,14 +15,14 @@ if platform.is_win then
       { label = 'Nushell', args = { 'nu' } },
       {
          label = 'Git Bash',
-         args = { 'C:\\Users\\markoj\\scoop\\apps\\git\\current\\bin\\bash.exe' },
+         args = { 'C:\\Users\\chiron\\scoop\\apps\\git\\current\\bin\\bash.exe' },
       },
    }
 elseif platform.is_mac then
    options.default_prog = { '/bin/zsh', '-l' }  -- Changed to zsh
-   options.default_cwd = '~/workspace'  -- macOS/Linux path
+   options.default_cwd = '~/workspace'  -- Projects path
    options.launch_menu = {
-      { label = 'Zsh', args = { '/bin/zsh', '-l' } },  -- Moved Zsh to the top
+      { label = 'Zsh', args = { '/bin/zsh', '-l' } },  -- Current 2024. Later fish
       { label = 'Bash', args = { 'bash', '-l' } },
       { label = 'Fish', args = { '/opt/homebrew/bin/fish', '-l' } },
       { label = 'Nushell', args = { '/opt/homebrew/bin/nu', '-l' } },
