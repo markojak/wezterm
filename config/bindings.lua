@@ -141,6 +141,12 @@ local keys = {
       action = act.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' }),
    },
 
+   -- Jump words
+
+   { key = 'LeftArrow',  mods = 'OPT',     action = act.SendString '\x1bb' },
+   { key = 'RightArrow', mods = 'OPT',     action = act.SendString '\x1bf' },
+   { key = 'Backspace',  mods = 'OPT',     action = act.SendString '\x17' },
+
    -- key-tables --
    -- resizes fonts
    {
