@@ -115,20 +115,6 @@ local keys = {
       end),
    },
    {
-      key = [[,]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_back(window)
-      end),
-   },
-   {
-      key = [[.]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_forward(window)
-      end),
-   },
-   {
       key = [[/]],
       mods = mod.SUPER_REV,
       action = act.InputSelector({
