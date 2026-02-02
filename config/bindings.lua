@@ -63,7 +63,6 @@ local keys = {
    -- tabs --
    -- tabs: spawn+close
    { key = 't',          mods = mod.SUPER,     action = act.SpawnTab('DefaultDomain') },
-   { key = 't',          mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = 'WSL:Ubuntu' }) },
    { key = 'w',          mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
 
    -- tabs: navigation
@@ -71,6 +70,37 @@ local keys = {
    { key = ']',          mods = mod.SUPER,     action = act.ActivateTabRelative(1) },
    { key = '[',          mods = mod.SUPER_REV, action = act.MoveTabRelative(-1) },
    { key = ']',          mods = mod.SUPER_REV, action = act.MoveTabRelative(1) },
+
+   -- tabs: jump to tab by number (Cmd+1-9)
+   { key = '1',          mods = mod.SUPER,     action = act.ActivateTab(0) },
+   { key = '2',          mods = mod.SUPER,     action = act.ActivateTab(1) },
+   { key = '3',          mods = mod.SUPER,     action = act.ActivateTab(2) },
+   { key = '4',          mods = mod.SUPER,     action = act.ActivateTab(3) },
+   { key = '5',          mods = mod.SUPER,     action = act.ActivateTab(4) },
+   { key = '6',          mods = mod.SUPER,     action = act.ActivateTab(5) },
+   { key = '7',          mods = mod.SUPER,     action = act.ActivateTab(6) },
+   { key = '8',          mods = mod.SUPER,     action = act.ActivateTab(7) },
+   { key = '9',          mods = mod.SUPER,     action = act.ActivateTab(-1) },
+
+   -- tabs: fuzzy finder
+   { key = 'p',          mods = mod.SUPER,     action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
+
+   -- workspaces: fuzzy switch
+   { key = 'o',          mods = mod.SUPER,     action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }) },
+
+   -- rename current tab
+   {
+      key = 'r',
+      mods = mod.SUPER_REV,
+      action = act.PromptInputLine({
+         description = 'Enter new tab title:',
+         action = wezterm.action_callback(function(window, pane, line)
+            if line then
+               window:active_tab():set_title(line)
+            end
+         end),
+      }),
+   },
 
    -- window --
    -- spawn windows
@@ -116,13 +146,13 @@ local keys = {
    -- panes --
    -- panes: split panes
    {
-      key = [[\]],
+      key = 'd',
       mods = mod.SUPER,
       action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
    },
    {
-      key = [[\]],
-      mods = mod.SUPER_REV,
+      key = 's',
+      mods = mod.SUPER,
       action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
    },
 
@@ -139,6 +169,20 @@ local keys = {
       key = 'p',
       mods = mod.SUPER_REV,
       action = act.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' }),
+   },
+
+   -- panes: quick jump with labels (Cmd+E shows numbers, press to jump)
+   {
+      key = 'e',
+      mods = mod.SUPER,
+      action = act.PaneSelect({ alphabet = '1234567890', show_pane_ids = true }),
+   },
+
+   -- panes: move to new tab
+   {
+      key = '!',
+      mods = mod.SUPER_REV,
+      action = act.PaneSelect({ alphabet = '1234567890', mode = 'MoveToNewTab' }),
    },
 
    -- Jump words

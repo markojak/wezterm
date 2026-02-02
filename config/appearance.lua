@@ -10,6 +10,7 @@ return {
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
    -- color scheme
+   -- color_scheme = 'Catppuccin Mocha',  -- Changed to lowercase 'nightfox'
    color_scheme = 'nightfox',  -- Changed to lowercase 'nightfox'
 
    -- background
@@ -34,7 +35,7 @@ return {
    hide_tab_bar_if_only_one_tab = false,
    use_fancy_tab_bar = true,
    tab_max_width = 25,
-   show_tab_index_in_tab_bar = false,
+   show_tab_index_in_tab_bar = true,
    switch_to_last_active_tab_when_closing_tab = true,
 
    -- window
@@ -54,4 +55,14 @@ return {
       saturation = 0.9,
       brightness = 0.65,
    },
+
+   -- brighten text (1.0 = normal, higher = brighter)
+   foreground_text_hsb = {
+      hue = 1.0,
+      saturation = 1.0,
+      brightness = 1.4,
+   },
+
+   -- pane selection overlay
+   pane_select_font_size = 48,
 }
