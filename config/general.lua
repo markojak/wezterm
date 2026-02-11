@@ -9,6 +9,11 @@ return {
 
    default_cwd = '~/workspace',  -- Add this line for default working directory
 
+   quick_select_patterns = {
+      '\\b[\\w./-]+\\.(?:lua|js|jsx|ts|tsx|py|rs|go|java|c|h|cpp|hpp|md|json|yml|yaml|toml|txt)(?::\\d+(?::\\d+)?)?\\b',
+      '\\b[\\w./-]+#L\\d+\\b',
+   },
+
    hyperlink_rules = {
       -- Matches: a URL in parens: (URL)
       {

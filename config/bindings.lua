@@ -32,18 +32,27 @@ local keys = {
       key = 'u',
       mods = mod.SUPER,
       action = wezterm.action.QuickSelectArgs({
-         label = 'open url',
+         label = 'open url / copy path',
          patterns = {
             '\\((https?://\\S+)\\)',
             '\\[(https?://\\S+)\\]',
             '\\{(https?://\\S+)\\}',
             '<(https?://\\S+)>',
-            '\\bhttps?://\\S+[)/a-zA-Z0-9-]+'
+            '\\bhttps?://\\S+[)/a-zA-Z0-9-]+',
+            '\\b[\\w./-]+\\.(?:lua|js|jsx|ts|tsx|py|rs|go|java|c|h|cpp|hpp|md|json|yml|yaml|toml|txt)(?::\\d+(?::\\d+)?)?\\b',
+            '\\b[\\w./-]+#L\\d+\\b',
          },
          action = wezterm.action_callback(function(window, pane)
-            local url = window:get_selection_text_for_pane(pane)
-            wezterm.log_info('opening: ' .. url)
-            wezterm.open_with(url)
+            local text = window:get_selection_text_for_pane(pane)
+            if text == '' then
+               return
+            end
+            if text:match('^%w+://') then
+               wezterm.log_info('opening: ' .. text)
+               wezterm.open_with(text)
+               return
+            end
+            window:perform_action(act.CopyTo('Clipboard'), pane)
          end),
       }),
    },
@@ -109,6 +118,13 @@ local keys = {
    -- background controls --
    {
       key = [[/]],
+      mods = mod.SUPER,
+      action = wezterm.action_callback(function(window, _pane)
+         backdrops:random(window)
+      end),
+   },
+   {
+      key = ',',
       mods = mod.SUPER,
       action = wezterm.action_callback(function(window, _pane)
          backdrops:random(window)

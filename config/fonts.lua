@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local platform = require('utils.platform')
 
 local font = 'Berkeley Mono'
-local font_size = platform().is_mac and 14 or 10
+local font_size = platform().is_mac and 12 or 9
 
 return {
    font = wezterm.font(font),

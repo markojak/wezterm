@@ -67,9 +67,19 @@ M.setup = function()
 
       local bg
       local fg
-      local process_name = _set_process_name(tab.active_pane.foreground_process_name)
       local is_admin = _check_if_admin(tab.active_pane.title)
-      local title = _set_title(process_name, tab.active_pane.title, max_width, (is_admin and 8))
+      local title
+
+      -- If the tab title is explicitly set, use it directly without the process prefix
+      if tab.tab_title and #tab.tab_title > 0 then
+         title = tab.tab_title
+         if title:len() > max_width - 6 then
+            title = wezterm.truncate_right(title, max_width - 6)
+         end
+      else
+         local process_name = _set_process_name(tab.active_pane.foreground_process_name)
+         title = _set_title(process_name, tab.active_pane.title, max_width, (is_admin and 8))
+      end
 
       if tab.is_active then
          bg = colors.is_active.bg
@@ -96,6 +106,16 @@ M.setup = function()
       -- Admin Icon
       if is_admin then
          _push(bg, fg, { Intensity = 'Bold' }, ' ' .. GLYPH_ADMIN)
+      end
+
+      -- Pad the title to fill more horizontal space
+      local min_width = 30
+      local content_len = title:len() + 2 -- account for surrounding spaces
+      if content_len < min_width then
+         local total_pad = min_width - content_len
+         local left_pad = math.floor(total_pad / 2)
+         local right_pad = total_pad - left_pad
+         title = string.rep(' ', left_pad) .. title .. string.rep(' ', right_pad)
       end
 
       -- Title
