@@ -64,6 +64,11 @@ return {
       brightness = 1.4,
    },
 
+   -- pane split color
+   colors = {
+      split = '#f38ba8',
+   },
+
    -- pane selection overlay
    pane_select_font_size = 48,
 }
